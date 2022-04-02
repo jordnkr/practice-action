@@ -18,7 +18,7 @@ try {
   //console.log('Report is done for', runnerResult.lhr.finalUrl);
   //console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
 
-  await chrome.kill();
+  chrome.kill();
 } catch (error) {
   core.setFailed(error.message);
 }
