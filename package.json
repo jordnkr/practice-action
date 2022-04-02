@@ -1,0 +1,25 @@
+{
+  "name": "practice-action",
+  "version": "1.0.0",
+  "description": "used for dev practice/sandbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordnkr/practice-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordnkr/practice-action/issues"
+  },
+  "homepage": "https://github.com/jordnkr/practice-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.1",
+    "lighthouse": "^9.5.0"
+  }
+}

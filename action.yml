@@ -1,0 +1,12 @@
+name: 'Practice Action'
+description: 'A practice action to try running various things'
+inputs:
+  url:  # url to run scripts against
+    description: 'URL of web page to script against'
+    required: true
+outputs:
+  performancescore: # id of output
+    description: 'The performance score'
+runs:
+  using: 'node16'
+  main: 'index.js'
