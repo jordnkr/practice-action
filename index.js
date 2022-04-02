@@ -8,7 +8,8 @@ try {
   const testUrl = core.getInput('url');
   console.log(`------TESTING URL: ${testUrl}`)
   const chrome = chromeLauncher.launch({chromeFlags: ['--headless']});
-  const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
+  console.log(chrome.port);
+  const options = {logLevel: 'info', output: 'json', port: chrome.port};
   const runnerResult = lighthouse(testUrl, options);
 
   // `.lhr` is the Lighthouse Result as a JS object
