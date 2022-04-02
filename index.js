@@ -3,23 +3,20 @@ const github = require('@actions/github');
 const lighthouse = require('lighthouse');
 const chromeLauncher = require('chrome-launcher');
 
-try {
-  // `url` input defined in action metadata file
+(async () => {
   const testUrl = core.getInput('url');
-  console.log(`------TESTING URL: ${testUrl}`)
-  const chrome = chromeLauncher.launch({chromeFlags: ['--headless']});
-  console.log(chrome.port);
-  const options = {logLevel: 'info', output: 'json', port: chrome.port};
-  const runnerResult = lighthouse(testUrl, options);
+  const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
+  const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
+  const runnerResult = await lighthouse(testUrl, options);
+
+  // `.report` is the HTML report as a string
+  const reportHtml = runnerResult.report;
+  fs.writeFileSync('lhreport.html', reportHtml);
 
   // `.lhr` is the Lighthouse Result as a JS object
   core.setOutput("performancescore", runnerResult.lhr.categories.performance.score * 100);
-  //console.log("-------------RUN RESULT------------");
-  //console.log(JSON.stringify(runnerResult.lhr));
-  //console.log('Report is done for', runnerResult.lhr.finalUrl);
-  console.log('CONSOLE LOG Performance score was', runnerResult.lhr.categories.performance.score * 100);
+  console.log('Report is done for', runnerResult.lhr.finalUrl);
+  console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
 
-  chrome.kill();
-} catch (error) {
-  core.setFailed(error.message);
-}
+  await chrome.kill();
+})();
