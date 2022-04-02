@@ -7,9 +7,9 @@ try {
   // `url` input defined in action metadata file
   const testUrl = core.getInput('url');
 
-  const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
+  const chrome = chromeLauncher.launch({chromeFlags: ['--headless']});
   const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
-  const runnerResult = await lighthouse(testUrl, options);
+  const runnerResult = lighthouse(testUrl, options);
 
   // `.lhr` is the Lighthouse Result as a JS object
   core.setOutput("performancescore", runnerResult.lhr.score.categories.performance.score * 100);
