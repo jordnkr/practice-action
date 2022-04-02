@@ -12,7 +12,7 @@ try {
   const runnerResult = lighthouse(testUrl, options);
 
   // `.lhr` is the Lighthouse Result as a JS object
-  core.setOutput("performancescore", runnerResult.lhr.score.categories.performance.score * 100);
+  core.setOutput("performancescore", runnerResult.lhr.categories.performance.score * 100);
   //console.log("-------------RUN RESULT------------");
   //console.log(JSON.stringify(runnerResult.lhr));
   //console.log('Report is done for', runnerResult.lhr.finalUrl);
